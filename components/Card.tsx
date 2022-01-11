@@ -5,14 +5,26 @@ import Image from 'next/image';
 import ActionBar from './ActionBar';
 
 const CardContainer = styled.div`
-  max-width: 400px;
-  background: grey;
-  margin-bottom: 10px;
+  max-width: 500px;
+  background: #002F2E;
+  margin-bottom: 20px;
+  color: white;
+  // Cuts of the text
+  overflow: hidden;
 `;
 const InnerContainer = styled.div`
   max-height: 400px;
+  padding: 30px;
+  padding-top: 0px;
+  display: inline-table; 
 `;
 
+const ShowMoreButton = styled.button`
+  height: 30px;
+  width: 100%;
+  background: #002423;
+  color: white;
+`;
 interface CardProps {
   photo: Photo;
   onClick: any;
@@ -35,15 +47,16 @@ const Card = ({ photo, onClick }: CardProps) => {
         src={media_type === "video" ? thumbnail_url : url}
         alt={title}
         className='photo-image'
-        width="400"
-        height="400"
+        width="500"
+        height="500"
       />
-      <ActionBar post={photo} liked={liked} onLikedButton={onClick} />
       <InnerContainer>
-        <h1>{title}</h1>
+      <ActionBar post={photo} liked={liked} onLikedButton={onClick} />
+        <h3 className="title-card">{title}</h3>
         <p className="date">{date}</p>
         <p className="explenation">{explanation}</p>
       </InnerContainer>
+      <ShowMoreButton>Show More</ShowMoreButton>
     </CardContainer>
   )
 }
