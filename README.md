@@ -6,9 +6,8 @@ All UI components were made from scratch. The aim for this project is to priorti
 
 ## Tools
 
-- Next.js 
+- Next.js | Next.js Routes
 - Typescript
-- Next.js routes
 - styled-components
 
 
