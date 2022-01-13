@@ -1,6 +1,5 @@
 
 import Image from 'next/image';
-import { useEffect } from 'react';
 import styled from 'styled-components';
 import { Photo } from '../utils/interfaces';
 
@@ -22,9 +21,7 @@ export interface ActionBarProps {
   onLikedButton: any
 }
 
-
 const ActionBar = ({ post, liked, onLikedButton }: ActionBarProps) => {
-
   return (
     <ActionBarContainer>
       <Image src={liked ? '/favorite_black_24dp.svg' : '/favorite_border_black_24dp.svg'}

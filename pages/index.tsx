@@ -7,6 +7,7 @@ import Card from '../components/Card';
 import Navbar from '../components/Navbar';
 import { Photo } from '../utils/interfaces';
 import { currentDate, getDate } from '../utils/helpers';
+import Loader from '../components/Loader';
 
 const API_KEY = "https://api.nasa.gov/planetary/apod?api_key=g9M8wUGMcefg71f0dj1NmB4LblvvgSwFPv6BVZPa&thumbs=true";
 const emptyList: Photo[] = [];
@@ -38,30 +39,27 @@ const HeaderContainer = styled.div`
 const Home: NextPage = () => {
 
   const [photoData, setPhotoData] = useState([]); 
-  const [date, setDate] = useState(getDate(currentDate(), 5))
+  //const [date, setDate] = useState(getDate(currentDate(), 5))
   const [likedList, setLikedList] = useState(emptyList); 
-
-  const addToLikedList = (photoData: Photo) => {
-    const newLikedList = [...likedList, photoData];
-    setLikedList(newLikedList);
-  }
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
 
+    setLoading(true);
     fetchPhotoData();
     async function fetchPhotoData() {
-      const start = "2022-01-01"
-      const end = "2022-01-05"
+      const start = "2022-01-01";
+      const end = "2022-01-05";
       const res = await fetch(  `https://api.nasa.gov/planetary/apod?start_date=${start}&end_date=${end}&api_key=g9M8wUGMcefg71f0dj1NmB4LblvvgSwFPv6BVZPa&thumbs=true`);
       const data = await res.json();
       setPhotoData(data);
+      setLoading(false);
     }
   }, []);
 
   const handleLiked = (targetPhoto: Photo) => {
-    targetPhoto.liked = !targetPhoto.liked
+    targetPhoto.liked = !targetPhoto.liked;
     let newLikedList = [...likedList];
-    console.log("Button is clicked!")
 
     if (isLiked(targetPhoto.title)) {
       newLikedList.splice(
