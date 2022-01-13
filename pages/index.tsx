@@ -59,6 +59,7 @@ const Home: NextPage = () => {
   }, []);
 
   const handleLiked = (targetPhoto: Photo) => {
+    targetPhoto.liked = !targetPhoto.liked
     let newLikedList = [...likedList];
     console.log("Button is clicked!")
 
@@ -75,6 +76,8 @@ const Home: NextPage = () => {
 
   const isLiked = (title: string) =>
     likedList.some((photo) => photo.title === title);
+
+
 
   if (!photoData) return <div />;
 

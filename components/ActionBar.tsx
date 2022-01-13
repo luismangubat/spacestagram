@@ -1,7 +1,8 @@
 
 import Image from 'next/image';
+import { useEffect } from 'react';
 import styled from 'styled-components';
-import { ActionBarProps, Photo } from '../utils/interfaces';
+import { Photo } from '../utils/interfaces';
 
 const ActionBarContainer = styled.div`
   width: 100%;
@@ -18,15 +19,19 @@ const Button = styled.button`
 export interface ActionBarProps {
   post: Photo
   liked: boolean
-  handleLiked: any
   onLikedButton: any
 }
 
 
 const ActionBar = ({ post, liked, onLikedButton }: ActionBarProps) => {
+
   return (
     <ActionBarContainer>
-      <Image src='/favorite_border_black_24dp.svg' alt="favorite" width="24" height="24" onClick={onLikedButton}/>
+      <Image src={liked ? '/favorite_black_24dp.svg' : '/favorite_border_black_24dp.svg'}
+        alt="favorite"
+        width="24"
+        height="24"
+        onClick={() => onLikedButton(post)} />
       <Image src='/send_black_24dp.svg' alt="share" width="24" height="24" />
     </ActionBarContainer>
   )

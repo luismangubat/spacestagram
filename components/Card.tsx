@@ -34,10 +34,16 @@ const Card = ({ photo, onClick }: CardProps) => {
 
   const { url, title, date, explanation, media_type, thumbnail_url } = photo;
   const [liked, setLiked] = useState(false);
+  const [showMore, setShowMore] = useState(false);
 
   const handleLikedChange = useCallback(
     () => setLiked(!liked),
     [liked]
+  );
+
+  const handleShowMore = useCallback(
+    () => setShowMore(!showMore),
+    [showMore]
   );
 
 
@@ -51,7 +57,7 @@ const Card = ({ photo, onClick }: CardProps) => {
         height="500"
       />
       <InnerContainer>
-      <ActionBar post={photo} liked={liked} onLikedButton={onClick} />
+      <ActionBar post={photo} liked={photo.liked} onLikedButton={onClick} />        
         <h3 className="title-card">{title}</h3>
         <p className="date">{date}</p>
         <p className="explenation">{explanation}</p>
