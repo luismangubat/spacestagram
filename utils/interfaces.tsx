@@ -5,7 +5,7 @@ export interface Photo {
   explanation: string;
   liked: boolean;
   media_type: string;
-  thumbnail_url: string
+  thumbnail_url: string;
 }
 
 export type ListAction = "Liked" | "UnLiked";

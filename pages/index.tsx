@@ -1,7 +1,5 @@
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import Head from 'next/head';
-import Image from 'next/image';
 import styled from 'styled-components';
 import Card from '../components/Card';
 import Navbar from '../components/Navbar';
@@ -9,7 +7,6 @@ import { Photo } from '../utils/interfaces';
 import { currentDate, getDate } from '../utils/helpers';
 import Loader from '../components/Loader';
 
-const API_KEY = "https://api.nasa.gov/planetary/apod?api_key=g9M8wUGMcefg71f0dj1NmB4LblvvgSwFPv6BVZPa&thumbs=true";
 const emptyList: Photo[] = [];
 
 const ContentContainer = styled.div`
@@ -50,7 +47,7 @@ const Home: NextPage = () => {
     async function fetchPhotoData() {
       const start = "2022-01-01";
       const end = "2022-01-05";
-      const res = await fetch(  `https://api.nasa.gov/planetary/apod?start_date=${start}&end_date=${end}&api_key=g9M8wUGMcefg71f0dj1NmB4LblvvgSwFPv6BVZPa&thumbs=true`);
+      const res = await fetch(`https://api.nasa.gov/planetary/apod?start_date=${start}&end_date=${end}&api_key=g9M8wUGMcefg71f0dj1NmB4LblvvgSwFPv6BVZPa&thumbs=true`);
       const data = await res.json();
       setPhotoData(data);
       setLoading(false);
@@ -75,19 +72,15 @@ const Home: NextPage = () => {
   const isLiked = (title: string) =>
     likedList.some((photo) => photo.title === title);
 
-
-
   if (!photoData) return <div />;
 
   return (
     <div className="container">
-      <section>
-        <Navbar/>
-      </section>
       <ContentContainer>
-          {photoData.map((photo, index) => (
+          {photoData.map((photo, index) => ( 
           <Card photo={photo} 
                 key={index}
+                show={loading}
                 onClick={() => handleLiked(photo)}
           />
           ))}

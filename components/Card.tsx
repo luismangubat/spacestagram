@@ -28,9 +28,10 @@ const ShowMoreButton = styled.button`
 interface CardProps {
   photo: Photo;
   onClick: any;
+  show: boolean;
 }
 
-const Card = ({ photo, onClick }: CardProps) => {
+const Card = ({ photo, onClick, show }: CardProps) => {
 
   const { url, title, date, explanation, media_type, thumbnail_url } = photo;
   const [liked, setLiked] = useState(false);
@@ -55,7 +56,9 @@ const Card = ({ photo, onClick }: CardProps) => {
         className='photo-image'
         width="500"
         height="500"
+        priority
       />
+
       <InnerContainer>
       <ActionBar post={photo} liked={photo.liked} onLikedButton={onClick} />        
         <h3 className="title-card">{title}</h3>

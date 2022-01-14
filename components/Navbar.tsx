@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import Loader from './Loader';
 
 export const Nav = styled.nav`
   background: #002F2E;
@@ -81,11 +82,15 @@ const Navbar = () => {
     <header>
       <Nav>
         <NavMenu>
-          <h1>Spacetagram</h1>
+          <Link href="/">
+            <h1>Spacetagram</h1>
+          </Link>
           </NavMenu>
           <Pages>
             {pages.map(page => (
+              <Link href={`/${page}`}>
               <NavBtn>{page}</NavBtn>
+              </Link>
             ))}
           </Pages>
       </Nav>
