@@ -46,7 +46,7 @@ export const Pages = styled.nav`
   display: flex;
 `;
 
-export const NavBtn = styled.nav`
+export const NavBtn = styled.button`
   display: flex;
   align-items: center;
   margin-right: 24px;
@@ -76,8 +76,12 @@ export const NavBtnLink = styled(Link)`
   }
 `;
 
-const Navbar = () => {
-  const pages = ["Search", "Likes", "Date"]
+interface navBarProps {
+  likesBtnClick: any
+  feedBtnClick: any
+}
+
+const Navbar = ({ likesBtnClick, feedBtnClick }: navBarProps) => {
   return (
     <header>
       <Nav>
@@ -85,14 +89,11 @@ const Navbar = () => {
           <Link href="/">
             <h1>Spacetagram</h1>
           </Link>
-          </NavMenu>
-          <Pages>
-            {pages.map(page => (
-              <Link href={`/${page}`}>
-              <NavBtn>{page}</NavBtn>
-              </Link>
-            ))}
-          </Pages>
+        </NavMenu>
+        <Pages>
+              <NavBtn onClick={() => feedBtnClick(false)}>Feed</NavBtn>
+              <NavBtn onClick={() => likesBtnClick(true)}>Likes</NavBtn>
+        </Pages>
       </Nav>
     </header>
   )

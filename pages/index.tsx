@@ -35,9 +35,10 @@ const HeaderContainer = styled.div`
 
 const Home: NextPage = () => {
 
-  const [photoData, setPhotoData] = useState([]); 
+  const [photoData, setPhotoData] = useState([]);
   //const [date, setDate] = useState(getDate(currentDate(), 5))
-  const [likedList, setLikedList] = useState(emptyList); 
+  const [likedList, setLikedList] = useState(emptyList);
+  const [likeButtonClicked, setlikeButtonClicked] = useState(false);
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -63,8 +64,9 @@ const Home: NextPage = () => {
         newLikedList.findIndex((photo) => photo.title === targetPhoto.title),
         1
       );
-    } 
-      newLikedList.push(targetPhoto);
+      
+    }
+    newLikedList.push(targetPhoto);
 
     setLikedList(newLikedList);
   };
@@ -72,18 +74,30 @@ const Home: NextPage = () => {
   const isLiked = (title: string) =>
     likedList.some((photo) => photo.title === title);
 
+  const handleLikeBtnChange = (likes: boolean) => {
+    //listRef.current!.scrollTo({ top: 0, behavior: "smooth" });
+    console.log('like button click')
+    setlikeButtonClicked(likes);
+  };
+
   if (!photoData) return <div />;
 
   return (
     <div className="container">
-      <ContentContainer>
-          {photoData.map((photo, index) => ( 
-          <Card photo={photo} 
-                key={index}
-                show={loading}
-                onClick={() => handleLiked(photo)}
+      <section>
+        <Navbar 
+          likesBtnClick={() => handleLikeBtnChange(true)}
+          feedBtnClick={() => handleLikeBtnChange(false)}
           />
-          ))}
+      </section>
+      <ContentContainer>
+        {(likeButtonClicked ? likedList : photoData).map((photo, index) => (
+          <Card photo={photo}
+            key={index}
+            show={loading}
+            onClick={() => handleLiked(photo)}
+          />
+        ))}
       </ContentContainer>
     </div>
   )

@@ -58,7 +58,6 @@ const Card = ({ photo, onClick, show }: CardProps) => {
         height="500"
         priority
       />
-
       <InnerContainer>
       <ActionBar post={photo} liked={photo.liked} onLikedButton={onClick} />        
         <h3 className="title-card">{title}</h3>

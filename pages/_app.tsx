@@ -9,9 +9,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Spacetagram</title>
       </Head>
-      <section>
-        <Navbar />
-      </section>
       <Component {...pageProps} />
     </>
   )
