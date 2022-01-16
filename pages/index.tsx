@@ -7,8 +7,6 @@ import { LikedList, Photo } from '../utils/interfaces';
 import { currentDate, getDate } from '../utils/helpers';
 import Loader from '../components/Loader';
 
-const emptyList: Photo[] = [];
-
 const ContentContainer = styled.div`
   position: relative;
   display: flex;
@@ -39,10 +37,21 @@ const Home: NextPage = () => {
   //const [date, setDate] = useState(getDate(currentDate(), 5))
   const [likedList, setLikedList] = useState<LikedList>({});
   const [likeButtonClicked, setlikeButtonClicked] = useState(false);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
+    const storageLikedList = localStorage.getItem("liked-list");
+    let likedObj = {};
+    if (storageLikedList) {
+      likedObj = JSON.parse(storageLikedList);
+      setLikedList(likedObj);
+    };
+    fetchPhotos();
+  }, []);
 
+
+  const fetchPhotos = () => {
     setLoading(true);
     fetchPhotoData();
     async function fetchPhotoData() {
@@ -53,28 +62,12 @@ const Home: NextPage = () => {
       setPhotoData(data);
       setLoading(false);
     }
-  }, []);
-
-
-  /*
-  const handleLiked = (targetPhoto: Photo) => {
-    targetPhoto.liked = !targetPhoto.liked;
-    let newLikedList = [...likedList];
-
-    if (isLiked(targetPhoto.title)) {
-      newLikedList.splice(
-        newLikedList.findIndex((photo) => photo.title === targetPhoto.title),
-        1
-      );
-    }
-    newLikedList.push(targetPhoto);
-    setLikedList(newLikedList);
   };
 
-  const isLiked = (title: string) =>
-    likedList.some((photo) => photo.title === title);
-
-  */
+  // Save to local storage
+  useEffect(() => {
+    localStorage.setItem("liked-list", JSON.stringify(likedList))
+  })
 
   const handleLikeBtnChange = (likes: boolean) => {
     //listRef.current!.scrollTo({ top: 0, behavior: "smooth" });
@@ -90,9 +83,6 @@ const Home: NextPage = () => {
       setLikedList(tempLikedList);
     } else setLikedList({ ...likedList, [likedPhoto.url]: likedPhoto });
   };
-
-
-
 
   if (!photoData) return <div />;
 
