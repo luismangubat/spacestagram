@@ -8,4 +8,8 @@ export interface Photo {
   thumbnail_url: string;
 }
 
+export interface LikedList {
+  [url: string]: Photo;
+}
+
 export type ListAction = "Liked" | "UnLiked";

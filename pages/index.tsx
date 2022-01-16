@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Card from '../components/Card';
 import Navbar from '../components/Navbar';
-import { Photo } from '../utils/interfaces';
+import { LikedList, Photo } from '../utils/interfaces';
 import { currentDate, getDate } from '../utils/helpers';
 import Loader from '../components/Loader';
 
@@ -37,7 +37,7 @@ const Home: NextPage = () => {
 
   const [photoData, setPhotoData] = useState([]);
   //const [date, setDate] = useState(getDate(currentDate(), 5))
-  const [likedList, setLikedList] = useState(emptyList);
+  const [likedList, setLikedList] = useState<LikedList>({});
   const [likeButtonClicked, setlikeButtonClicked] = useState(false);
   const [loading, setLoading] = useState(true)
 
@@ -55,6 +55,8 @@ const Home: NextPage = () => {
     }
   }, []);
 
+
+  /*
   const handleLiked = (targetPhoto: Photo) => {
     targetPhoto.liked = !targetPhoto.liked;
     let newLikedList = [...likedList];
@@ -64,21 +66,33 @@ const Home: NextPage = () => {
         newLikedList.findIndex((photo) => photo.title === targetPhoto.title),
         1
       );
-      
     }
     newLikedList.push(targetPhoto);
-
     setLikedList(newLikedList);
   };
 
   const isLiked = (title: string) =>
     likedList.some((photo) => photo.title === title);
 
+  */
+
   const handleLikeBtnChange = (likes: boolean) => {
     //listRef.current!.scrollTo({ top: 0, behavior: "smooth" });
     console.log('like button click')
     setlikeButtonClicked(likes);
   };
+
+  const handleLiked = (likedPhoto: Photo) => {
+    likedPhoto.liked = !likedPhoto.liked;
+    if (likedList.hasOwnProperty(likedPhoto.url)) {
+      const tempLikedList = { ...likedList };
+      delete tempLikedList[likedPhoto.url];
+      setLikedList(tempLikedList);
+    } else setLikedList({ ...likedList, [likedPhoto.url]: likedPhoto });
+  };
+
+
+
 
   if (!photoData) return <div />;
 
@@ -91,7 +105,7 @@ const Home: NextPage = () => {
           />
       </section>
       <ContentContainer>
-        {(likeButtonClicked ? likedList : photoData).map((photo, index) => (
+        {(likeButtonClicked ? Object.values(likedList) : photoData).map((photo, index) => (
           <Card photo={photo}
             key={index}
             show={loading}
