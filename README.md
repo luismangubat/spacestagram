@@ -11,7 +11,7 @@ The aim for this project is to priortize mobile first design, performance and ac
 
 ## Tools
 
-- Next.js | Next.js Routes
+- Next.js
 - Typescript
 - styled-components
 
