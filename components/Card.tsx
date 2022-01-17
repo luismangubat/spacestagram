@@ -50,6 +50,7 @@ const Card = ({ photo, onClick, show }: CardProps) => {
         width="500"
         height="500"
         priority
+
       />
       <InnerContainer>
       <ActionBar post={photo} date={photo.date} liked={photo.liked} onLikedButton={onClick} />        

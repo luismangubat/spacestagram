@@ -22,7 +22,7 @@ const ShowMoreWrapperBtn = styled.button`
 
 const GradientDiv = styled.div`
   height: 21px;
-  background: linear-gradient(to bottom,rgb(57 143 75 / 0%) 25%,rgb(64 103 68) 100%);
+  background: linear-gradient(to bottom,rgb(57 143 75 / 0%) 25%,rgb(0 47 46) 100%);
 `;
 
   interface ShowMoreProps {
@@ -37,7 +37,6 @@ const GradientDiv = styled.div`
       setToggled(!toggled)
     }
   
-
   return (
     <>
       {!toggled && <GradientDiv />}

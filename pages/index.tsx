@@ -9,6 +9,7 @@ import Loader from '../components/Loader';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const ContentContainer = styled.div`
+  background: 001818;
   position: relative;
   display: flex;
   align-items: center;
