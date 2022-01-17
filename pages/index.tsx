@@ -12,9 +12,10 @@ const ContentContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  padding: 2rem 1rem;
+  padding: 6rem 1rem;
   flex-direction: column;
   max-width: 1080px;
+  background: #001818;
 
   @media (min-width: 769px) {
     width: 70%;

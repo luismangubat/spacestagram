@@ -11,6 +11,7 @@ const CardContainer = styled.div`
   margin-bottom: 20px;
   color: white;
   overflow: hidden;
+  border-radius: 10px;
 `;
 const InnerContainer = styled.div`
   display: flex;

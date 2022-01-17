@@ -3,13 +3,19 @@ import styled from 'styled-components';
 import Link from 'next/link';
 
 export const Nav = styled.nav`
-  background: #002F2E;
+  background: #001818;
   color: white;
   height: 70px;
   display: flex;
   justify-content: space-between;
   padding: 0.2rem calc((100vw - 1000px) / 6);
   z-index: 12;
+  position: fixed;
+  width: 100%;
+  backgroundColor: 'white',
+  backdropFilter: "blur(20px) saturate(200%)",
+  boxShadow: "0 0 20px rgba(0,0,0,.04)",
+  background: 'rgba(250,251,255,.01)',
 `;
 
 export const NavLink = styled(Link)`
