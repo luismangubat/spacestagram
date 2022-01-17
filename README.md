@@ -27,5 +27,4 @@ The aim for this project is to priortize mobile first design, performance and ac
 - Photo card that contains title, image, like/unlike button, and date
 
 # Performance
-[Performance](https://user-images.githubusercontent.com/14239415/149830634-8c808bfd-ad73-4133-b4f9-ff3a770b743e.png)
-
+![Performance](https://user-images.githubusercontent.com/14239415/149830867-574276bf-74c2-4f50-86f4-a6eebcfc900b.gif)
