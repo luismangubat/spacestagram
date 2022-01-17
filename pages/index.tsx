@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import { LikedList, Photo } from '../utils/interfaces';
 import { currentDate, getDate } from '../utils/helpers';
 import Loader from '../components/Loader';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const ContentContainer = styled.div`
   position: relative;
@@ -25,20 +26,14 @@ const ContentContainer = styled.div`
   }
 `;
 
-const HeaderContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 0;
-`;
-
 const Home: NextPage = () => {
 
-  const [photoData, setPhotoData] = useState([]);
-  //const [date, setDate] = useState(getDate(currentDate(), 5))
+  const [photoData, setPhotoData] = useState<Photo[]>([]);
+  const [startDate, setStartdDate] = useState(getDate(currentDate(), 3))
+  const [endDate, setEndDate] = useState(startDate)
   const [likedList, setLikedList] = useState<LikedList>({});
   const [likeButtonClicked, setlikeButtonClicked] = useState(false);
   const [loading, setLoading] = useState(true);
-
 
   useEffect(() => {
     const storageLikedList = localStorage.getItem("liked-list");
@@ -50,33 +45,45 @@ const Home: NextPage = () => {
     fetchPhotos();
   }, []);
 
-
   const fetchPhotos = () => {
     setLoading(true);
-    fetchPhotoData();
+    fetchPhotoData()
     async function fetchPhotoData() {
-      const start = "2022-01-01";
-      const end = "2022-01-05";
-      const res = await fetch(`https://api.nasa.gov/planetary/apod?start_date=${start}&end_date=${end}&api_key=g9M8wUGMcefg71f0dj1NmB4LblvvgSwFPv6BVZPa&thumbs=true`);
+      const res = await fetch(`https://api.nasa.gov/planetary/apod?start_date=${startDate}&end_date=${currentDate()}&api_key=g9M8wUGMcefg71f0dj1NmB4LblvvgSwFPv6BVZPa&thumbs=true`);
       const data = await res.json();
-      setPhotoData(data);
+      const modified = data.reverse()
+      setPhotoData(modified.slice(0,-1));
       setLoading(false);
     }
+    setLoading(false);
   };
 
-  // Save to local storage
+  async function fetchMore() {
+    setLoading(true);
+    setEndDate(getDate(startDate, 1))
+    setStartdDate(getDate(endDate, 2))
+    const res = await fetch(`https://api.nasa.gov/planetary/apod?start_date=${startDate}&end_date=${endDate}&api_key=g9M8wUGMcefg71f0dj1NmB4LblvvgSwFPv6BVZPa&thumbs=true`);
+    const data = await res.json();
+    const reverse = data.reverse();
+
+    setPhotoData((photoData) => [...photoData, ...reverse])
+    console.log("End date:", endDate, "StartDate", startDate)
+    console.log(data)
+    setLoading(false);
+
+  }
+
   useEffect(() => {
     localStorage.setItem("liked-list", JSON.stringify(likedList))
   })
 
-  const handleLikeBtnChange = (likes: boolean) => {
-    //listRef.current!.scrollTo({ top: 0, behavior: "smooth" });
-    console.log('like button click')
-    setlikeButtonClicked(likes);
+  const handleLikeBtnChange = (like: boolean) => {
+    setlikeButtonClicked(like);
   };
 
   const handleLiked = (likedPhoto: Photo) => {
     likedPhoto.liked = !likedPhoto.liked;
+    setLoading(false)
     if (likedList.hasOwnProperty(likedPhoto.url)) {
       const tempLikedList = { ...likedList };
       delete tempLikedList[likedPhoto.url];
@@ -95,16 +102,21 @@ const Home: NextPage = () => {
           />
       </section>
       <ContentContainer>
-        {(likeButtonClicked ? Object.values(likedList) : photoData).map((photo, index) => (
-          <Card photo={photo}
-            key={index}
-            show={loading}
-            onClick={() => handleLiked(photo)}
-          />
-        ))}
+        <InfiniteScroll dataLength={likeButtonClicked ? Object.values(likedList).length : photoData.length}
+                        next={fetchMore}
+                        hasMore={true}
+                        loader={ likeButtonClicked ? false : <Loader show={loading}/>}>
+          {(likeButtonClicked ? Object.values(likedList) : photoData).map((photo, index) => (
+            <Card photo={photo}
+              key={index}
+              show={loading}
+              onClick={() => handleLiked(photo)}
+            />
+          ))}
+        </InfiniteScroll>
       </ContentContainer>
     </div>
   )
-}
+};
 
-export default Home
+export default Home;

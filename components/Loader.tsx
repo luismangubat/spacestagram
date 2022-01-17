@@ -1,19 +1,38 @@
 import React from 'react'
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-export const LoaderDiv = styled.nav`
-  border: 10px solid var(--color-bg); 
-  border-top: 10px solid var(--color-blue); 
+
+const rotate360 = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const LoaderDiv = styled.div`
+  animation: ${rotate360} 1s linear infinite;
+  transform: translateZ(0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  border-top: 2px solid grey;
+  border-right: 2px solid grey;
+  border-bottom: 2px solid grey;
+  border-left: 4px solid black;
+  background: transparent;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 2s linear infinite;
-  }
+`;
 
-  @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-  }
+const LoaderContainer = styled.div`
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 `;
 
 interface Show {
@@ -21,7 +40,7 @@ interface Show {
 }
 
 const Loader = ({ show }: Show) => {
-  return show ? <LoaderDiv>Loader</LoaderDiv> : null;
+  return show ? null : <LoaderContainer ><LoaderDiv /></LoaderContainer >;
 }
 
-export default Loader
+export default Loader;

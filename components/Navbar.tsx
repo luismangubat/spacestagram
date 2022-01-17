@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import Loader from './Loader';
 
 export const Nav = styled.nav`
   background: #002F2E;
@@ -11,8 +10,6 @@ export const Nav = styled.nav`
   justify-content: space-between;
   padding: 0.2rem calc((100vw - 1000px) / 6);
   z-index: 12;
-  /* Third Nav */
-  /* justify-content: flex-start; */
 `;
 
 export const NavLink = styled(Link)`
@@ -32,14 +29,8 @@ export const NavMenu = styled.div`
   display: flex;
   align-items: center;
   margin-right: -24px;
-  /* Second Nav */
-  /* margin-right: 24px; */
-  /* Third Nav */
-  /* width: 100vw;
-  white-space: nowrap; */
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
+  padding-left: 20px;
+
 `;
 
 export const Pages = styled.nav`
@@ -50,9 +41,11 @@ export const NavBtn = styled.button`
   display: flex;
   align-items: center;
   margin-right: 24px;
-  /* Third Nav */
-  /* justify-content: flex-end;
-  width: 100vw; */
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+
   @media screen and (max-width: 768px) {
     display: none;
   }
@@ -79,7 +72,7 @@ export const NavBtnLink = styled(Link)`
 interface navBarProps {
   likesBtnClick: any
   feedBtnClick: any
-}
+};
 
 const Navbar = ({ likesBtnClick, feedBtnClick }: navBarProps) => {
   return (
@@ -97,6 +90,6 @@ const Navbar = ({ likesBtnClick, feedBtnClick }: navBarProps) => {
       </Nav>
     </header>
   )
-}
+};
 
-export default Navbar
+export default Navbar;

@@ -1,12 +1,5 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
-
-const ShowMoreButton = styled.button`
-  height: 30px;
-  width: 100%;
-  background: #002423;
-  color: white;
-`;
 
 const ShowMoreContainer = styled.div`
   display: flex;
@@ -50,7 +43,6 @@ const GradientDiv = styled.div`
       {!toggled && <GradientDiv />}
       <ShowMoreContainer>
         <ShowMoreWrapperBtn onClick={handleToggle}>
-          { /*  <Icon name={toggled ? 'chevron-up' : 'chevron-down'} /> */ }
           {toggled ? 'Show less' : 'Show more'}
         </ShowMoreWrapperBtn>
       </ShowMoreContainer>

@@ -24,24 +24,16 @@ const InnerContainer = styled.div`
 interface CardProps {
   photo: Photo;
   onClick: any;
+
+  // maybe used for loading screen
   show: boolean;
 }
 
 const Card = ({ photo, onClick, show }: CardProps) => {
 
   const { url, title, date, explanation, media_type, thumbnail_url } = photo;
-  const [liked, setLiked] = useState(false);
   const [showMore, setShowMore] = useState(false);
 
-  const handleLikedChange = useCallback(
-    () => setLiked(!liked),
-    [liked]
-  );
-
-  const handleShowMore = useCallback(
-    () => setShowMore(!showMore),
-    [showMore]
-  );
 
   const Description = styled.p`
   height: ${showMore ? "max-content": "50px" };
@@ -59,9 +51,8 @@ const Card = ({ photo, onClick, show }: CardProps) => {
         priority
       />
       <InnerContainer>
-      <ActionBar post={photo} liked={photo.liked} onLikedButton={onClick} />        
+      <ActionBar post={photo} date={photo.date} liked={photo.liked} onLikedButton={onClick} />        
         <h3 className="title-card">{title}</h3>
-        <p className="date">{date}</p>
         <Description >{explanation}</Description>
         <ShowMore setChange={setShowMore}/>
       </InnerContainer>
