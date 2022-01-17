@@ -16,4 +16,8 @@ The aim for this project is to priortize mobile first design, performance and ac
 
 - Like & Unlike  
 - Infinite Scroll
+- Loading spinner during wait time
 - Save to local storage 
+- Seperate Photo Gallery for liked images
+- Mobile friendly
+- Photo card that contains title, image, like/unlike button, and date
