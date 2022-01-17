@@ -25,6 +25,7 @@ The aim for this project is to priortize mobile first design, performance and ac
 - Seperate Photo Gallery for liked images
 - Mobile friendly
 - Photo card that contains title, image, like/unlike button, and date
+- 98 Accesbility score from lighthouse
 
 # Performance
 ![Performance](https://user-images.githubusercontent.com/14239415/149830867-574276bf-74c2-4f50-86f4-a6eebcfc900b.gif)
