@@ -25,3 +25,13 @@ The aim for this project is to priortize mobile first design, performance and ac
 - Seperate Photo Gallery for liked images
 - Mobile friendly
 - Photo card that contains title, image, like/unlike button, and date
+
+# Performance
+<!--START_SECTION:waka-->
+```text
+Accesbility                  ███████████████████████▒▒   90.77 % 
+TypeScript   14 mins         ▒░░░░░░░░░░░░░░░░░░░░░░░░   00.89 % 
+Git Config   12 mins         ▒░░░░░░░░░░░░░░░░░░░░░░░░   00.75 % 
+Other        5 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.33 % 
+XML          2 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.17 % 
+```
