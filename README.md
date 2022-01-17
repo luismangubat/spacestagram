@@ -16,5 +16,4 @@ The aim for this project is to priortize mobile first design, performance and ac
 
 - Like & Unlike  
 - Infinite Scroll
-- Shareable links
-- Search photos by date
+- Save to local storage 
