@@ -3,28 +3,24 @@ import styled from 'styled-components';
 import { Photo } from '../utils/interfaces';
 import Image from 'next/image';
 import ActionBar from './ActionBar';
+import ShowMore from './ShowMore';
 
 const CardContainer = styled.div`
   max-width: 500px;
   background: #002F2E;
   margin-bottom: 20px;
   color: white;
-  // Cuts of the text
   overflow: hidden;
 `;
 const InnerContainer = styled.div`
-  max-height: 400px;
-  padding: 30px;
-  padding-top: 0px;
-  display: inline-table; 
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0 15px;
+  height: max-content;
+  font-weight: 300;
 `;
 
-const ShowMoreButton = styled.button`
-  height: 30px;
-  width: 100%;
-  background: #002423;
-  color: white;
-`;
 interface CardProps {
   photo: Photo;
   onClick: any;
@@ -47,6 +43,10 @@ const Card = ({ photo, onClick, show }: CardProps) => {
     [showMore]
   );
 
+  const Description = styled.p`
+  height: ${showMore ? "max-content": "50px" };
+  margin: 5px 0; 
+`;
 
   return (
     <CardContainer>
@@ -62,9 +62,9 @@ const Card = ({ photo, onClick, show }: CardProps) => {
       <ActionBar post={photo} liked={photo.liked} onLikedButton={onClick} />        
         <h3 className="title-card">{title}</h3>
         <p className="date">{date}</p>
-        <p className="explenation">{explanation}</p>
+        <Description >{explanation}</Description>
+        <ShowMore setChange={setShowMore}/>
       </InnerContainer>
-      <ShowMoreButton>Show More</ShowMoreButton>
     </CardContainer>
   )
 }
