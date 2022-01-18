@@ -34,8 +34,7 @@ const Card = ({ photo, onClick, show }: CardProps) => {
 
   const { url, title, date, explanation, media_type, thumbnail_url } = photo;
   const [showMore, setShowMore] = useState(false);
-
-
+  
   const Description = styled.p`
   height: ${showMore ? "max-content": "50px" };
   margin: 5px 0; 

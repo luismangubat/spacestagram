@@ -67,10 +67,7 @@ const Home: NextPage = () => {
     const res = await fetch(`https://api.nasa.gov/planetary/apod?start_date=${startDate}&end_date=${endDate}&api_key=g9M8wUGMcefg71f0dj1NmB4LblvvgSwFPv6BVZPa&thumbs=true`);
     const data = await res.json();
     const reverse = data.reverse();
-
     setPhotoData((photoData) => [...photoData, ...reverse])
-    console.log("End date:", endDate, "StartDate", startDate)
-    console.log(data)
     setLoading(false);
 
   }

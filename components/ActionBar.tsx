@@ -14,7 +14,6 @@ const Button = styled.button`
   display: flex;
   align-items: center;
 `
-
 export interface ActionBarProps {
   post: Photo
   liked: boolean
