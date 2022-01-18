@@ -69,7 +69,6 @@ const Home: NextPage = () => {
     const reverse = data.reverse();
     setPhotoData((photoData) => [...photoData, ...reverse])
     setLoading(false);
-
   }
 
   useEffect(() => {
