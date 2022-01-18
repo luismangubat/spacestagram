@@ -1,7 +1,7 @@
 # Shopify Frontend Internship Challenge 2022
 
 
-A Next.js web application that pulls images from NASA's (APOD) Astronomy Picture of the Day API. It is displayed in a Instagram like format that allow a user to like,search and share photos. 
+A Next.js web application that pulls images from NASA's (APOD) Astronomy Picture of the Day API. It is displayed in a Instagram like forma.
 
 - [**Challenge app**](https://spacestagram-livid.vercel.app/)
 - [**Challenge specification**](https://docs.google.com/document/d/13zXpyrC2yGxoLXKktxw2VJG2Jw8SdUfliLM-bYQLjqE/edit)
